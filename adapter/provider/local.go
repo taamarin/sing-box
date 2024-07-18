@@ -150,7 +150,7 @@ func (p *LocalProvider) UpdateProvider(ctx context.Context, router adapter.Route
 		return nil
 	}
 
-	updated, err := p.updateProviderFromContent(ctx, router, decodeBase64Safe(content))
+	_, err := p.updateProviderFromContent(ctx, router, decodeBase64Safe(content))
 	if err != nil {
 		p.logger.ErrorContext(ctx, E.Cause(err, "updating outbound provider ", p.tag, " from local file"))
 		return err
@@ -160,8 +160,5 @@ func (p *LocalProvider) UpdateProvider(ctx context.Context, router adapter.Route
 	p.lastUpdated = fileModeTime
 	p.logger.InfoContext(ctx, "update outbound provider ", p.tag, " success")
 
-	if updated {
-		p.CheckOutbounds(true)
-	}
 	return nil
 }
