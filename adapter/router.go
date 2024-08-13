@@ -21,6 +21,8 @@ import (
 type Router interface {
 	Lifecycle
 	ConnectionRouter
+	OutboundManager() OutboundManager
+	ProviderManager() OutboundProviderManager
 	PreMatch(metadata InboundContext, context tun.DirectRouteContext, timeout time.Duration) (tun.DirectRouteDestination, error)
 	ConnectionRouterEx
 	RuleSet(tag string) (RuleSet, bool)
