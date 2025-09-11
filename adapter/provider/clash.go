@@ -66,6 +66,12 @@ func convertTLSOptions(proxy map[string]any) *option.OutboundTLSOptions {
 			options.Reality.ShortID = sid
 		}
 	}
+	if kerneltx, exists := proxy["kernel-tx"].(bool); exists {
+		options.KernelTx = kerneltx
+	}
+	if kernelrx, exists := proxy["kernel-rx"].(bool); exists {
+		options.KernelRx = kernelrx
+	}
 	if proxy["type"] == "trojan" {
 		options.Enabled = true
 	}
